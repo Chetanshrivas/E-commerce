@@ -1,0 +1,62 @@
+<head>
+  <!-- Ensure Font Awesome is included -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* .navbar-gradient {
+      background: linear-gradient(90deg, #65d2ed, #812dd1, #2574c3) !important;
+      background-size: cover !important;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    } */
+
+    nav{
+      background-image: url(https://images.unsplash.com/photo-1675020007254-eaa81f584161?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGltYWdlJTIwZm9yJTIwZSUyMGNvbW1lcmNlJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D);
+      background-size: cover;
+      background-position: center;
+      
+    }
+  </style>
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-gradient  sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand fs-3" href="/">Shoping-Cart</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active abc" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link abc" href="/products">Products</a>
+        </li>
+        <% if(currentUser && currentUser.role === 'seller') { %>
+        <li class="nav-item">
+          <a class="nav-link" href="/product/new">Add Products</a>
+        </li>
+        <% } %>
+      </ul>
+      
+      <div class="d-flex align-items-center">
+        <% if(!currentUser) { %>
+          <a href="/login" class="btn btn-success mx-2">Login</a>
+          <a href="/register" class="btn btn-primary">Sign Up</a>
+        <% } else { %>
+          <span class="nav-link text-white me-3">Hi, <%=currentUser.username%></span>
+          <a href="/user/cart" class="nav-link position-relative mx-3 cart-icon">
+            <i class="fa-solid fa-cart-plus fs-4 text-white"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">2</span>
+          </a>
+          <a href="/logout" class="btn btn-danger">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  gsap.from('.navbar-nav .nav-link', { opacity: 0, duration: 1, delay: 0.5, y: -50 });
+  gsap.from('.btn', { opacity: 0, duration: 1, delay: 1, y: -50 });
+</script>

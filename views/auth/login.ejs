@@ -1,0 +1,33 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/flash') %>
+
+<div class="row" >
+
+    <div class="col-md-6 mx-auto" >
+
+        <h1  class="display-6 mt-5 fw-bold fst-italic fs-1" > Login </h1>
+        <form action="/login" method="post"> 
+
+            <div class="mt-3">
+                <label  class="form-label" for="username">Username:</label>
+                <input  class= "form-control" type="text" id="username" name="username" placeholder="Enter your username">
+            </div>
+
+            <div class="mt-3">
+                <label class="form-label" for="password">Password:</label>
+                <input class= "form-control" type="password" id="password" name="password" placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class=" btn btn-sm btn-success mt-3"> login </button>
+            <p class="fw-light mt-2" > Don't have an account? <a href="/register" style="text-decoration: none;">Sing up</a> </p>
+        </form>
+
+
+        <!-- <div class="visme_d" data-title="Simple Newsletter Subscription" data-url="n010zkpz-simple-newsletter-subscription?fullPage=true" data-domain="forms" data-full-page="true" data-min-height="100vh" data-form-id="112509"></div><script src="https://static-bundles.visme.co/forms/vismeforms-embed.js"></script> -->
+
+
+
+    </div>
+</div>
+  

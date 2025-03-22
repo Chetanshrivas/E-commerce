@@ -1,0 +1,86 @@
+<% layout('layouts/boilerplate') %>
+
+<%- include('../partials/header') %>
+
+<div class="row "  style="margin-top: 5rem;">
+
+   <div class="col-6 mx-auto"> 
+        <form action="/products" method="POST"   class="needs-validation"  novalidate>
+
+        <div class="mb-3"> 
+            <label for="naam">Name :</label>
+            <input type="text" id="naam" class="form-control" name="name" placeholder="Name of the product" required>
+            <div class="valid-feedback">
+                Nice one!
+              </div>
+              <div class="invalid-feedback">
+                Please fill your name.
+              </div>
+
+        </div>
+
+        <div class="mb-3"> 
+            <label for="img">Image :</label>
+            <input type="text" id="img" class="form-control" name="image" placeholder="URL of the image" required>
+            <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please choose a image url.
+              </div>
+        </div>
+
+        <div class="mb-3"> 
+            <label for="paisa">Price :</label>
+            <input type="number" id="paisa" class="form-control"  min="0" name="price" placeholder="Price of the product" required>
+            <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Please choose a price.
+              </div>
+        </div>
+
+        <div class="mb-3"> 
+            <label for="desc">Description :</label>
+            <input type="text" id="desc" class="form-control" name="description" placeholder="Description of the product" required>
+            <div class="valid-feedback">
+                Nice one !
+              </div>
+              <div class="invalid-feedback">
+               tell us about the product.
+              </div>
+        </div>
+
+        <button type="submit" class="btn btn-sm btn-success">Add Product</button>
+        </form>
+
+   </div>
+
+</div>
+
+<script>
+    // iife ( immidiately invoked functional expression) when a function call by itself 
+    (() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+</script>
+  
+</body>
+</html>
