@@ -11,53 +11,52 @@
 </div> -->
 
 <div class="container mt-5">
-<div class="row">
+  <div class="row">
+    <% for(let item of products){ %>
+      <div class="col-lg-3 col-md-4 col-sm-6 mt-3">
+        <div class="card product-card shadow-lg border-0 rounded-4 overflow-hidden h-100 mx-auto bg-white" style="transition: all 0.3s ease-in-out;">
 
-    <%  for(let item of products){   %>
-     
-           <div class = "col-lg-3 col-md-4 col-sm-6 mt-3">
+          <div class="position-relative">
+            <img src="<%=item.image%>" class="card-img-top img-fluid" alt="Product Image" style="object-fit: cover; height: 12rem; transition: transform 0.3s;">
+            <div class="overlay position-absolute top-0 start-0 w-100 h-100 bg-black opacity-0" style="background: rgba(0,0,0,0.15); transition: opacity 0.3s;"></div>
+          </div>
 
-                <div class="card shadow h-100 mx-auto product-card" style="width: 100%">
-                    <img src="<%=item.image%>" class="card-img-top img-fluid" alt="..." style="object-fit: cover; height: 12rem;">
+          <div class="card-body d-flex flex-column text-center">
+            <h5 class="card-title fw-bold text-dark" style="color: #2C3E50;"><%= item.name %></h5>
+            <h5 class="card-title" style="color: #27AE60; font-weight: 600;">₹ <%= item.price %></h5>
+            <p class="card-text flex-grow-1 text-muted"><%= item.description %></p>
 
-                    <div class="card-body d-flex flex-column">
-                      
-                      <h5 class="card-title"><%=item.name%></h5>
-                      <h5 class="card-title"> <%= item.price%> &#8377;</h5>
-                      <p class="card-text flex-grow-1 "><%= item.description%></p>
+            <a href="/products/<%=item.id%>" class="btn btn-sm shadow-sm rounded-pill px-4" style="background: linear-gradient(90deg, #3498db, #2980b9); color: white; transition: 0.3s;">
+              View Item
+            </a>
 
-                      <a href="/products/<%=item.id%>" class="btn btn-sm btn-primary">View Item</a>
+            <% if(currentUser && currentUser.role === 'seller'){ %>
+              <form action="/products/<%=item._id%>?_method=DELETE" method="POST" class="mt-2">
+                <button class="btn btn-sm shadow-sm rounded-pill px-4" style="background: #E74C3C; color: white; transition: 0.3s;">
+                  Delete
+                </button>
+              </form>
+            <% } %>
+          </div>
 
-                      <% if(currentUser && currentUser.role === 'seller'){ %>
-                        <form class="card-body" action="/products/<%=item._id%>?_method=DELETE" method="POST">
-                          <button class="btn btn-sm btn-danger">Delete</button>
-                        </form>
-                      <% } %>
-                      
-
-
-                    </div>
-
-                </div>
-
-            </div>
-
-   <% } %>
-
+        </div>
+      </div>
+    <% } %>
   </div>
-
 </div>
 
 <script>
   document.querySelectorAll('.product-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
-      gsap.to(card, { scale: 1.05, duration: 0.3 });
+      gsap.to(card, { scale: 1.05, boxShadow: '0px 10px 20px rgba(0, 0, 0, 0.15)', duration: 0.3 });
+      gsap.to(card.querySelector('.overlay'), { opacity: 0.2, duration: 0.3 });
+      gsap.to(card.querySelector('img'), { transform: 'scale(1.1)', duration: 0.3 });
     });
+
     card.addEventListener('mouseleave', () => {
-      gsap.to(card, { scale: 1, duration: 0.3 });
+      gsap.to(card, { scale: 1, boxShadow: 'none', duration: 0.3 });
+      gsap.to(card.querySelector('.overlay'), { opacity: 0, duration: 0.3 });
+      gsap.to(card.querySelector('img'), { transform: 'scale(1)', duration: 0.3 });
     });
   });
 </script>
-  
-</body>
-</html>
